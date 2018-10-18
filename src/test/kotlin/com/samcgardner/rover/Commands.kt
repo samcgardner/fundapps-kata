@@ -90,7 +90,7 @@ class Commands {
     @Test
     fun turnsLeft() {
         val initialRover = Rover(0, 0, Direction.N)
-        val movedRover = applyCommand(initialRover, Command.R)
+        val movedRover = applyCommand(initialRover, Command.L)
         assertEquals(0, movedRover.x)
         assertEquals(0, movedRover.y)
         assertEquals(Direction.W, movedRover.heading)

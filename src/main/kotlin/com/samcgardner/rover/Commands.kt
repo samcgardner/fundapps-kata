@@ -1,5 +1,7 @@
 package com.samcgardner.rover
 
+import java.util.Collections.rotate
+
 data class Rover(val x : Int, val y : Int, val heading : Direction)
 enum class Command{F, B, R, L}
 enum class Direction{N, S, E, W}
@@ -15,8 +17,8 @@ fun applyCommand(rover : Rover, command : Command) : Rover {
     return when(command) {
         Command.F -> move(rover, rover.heading)
         Command.B -> move(rover, invertDirection(rover.heading))
-        Command.R -> rover
-        Command.L -> rover
+        Command.R -> rover.copy(heading = rotateClockwise(rover.heading))
+        Command.L -> rover.copy(heading = invertDirection(rotateClockwise(rover.heading)))
     }
 }
 
@@ -26,6 +28,15 @@ fun move(rover : Rover, direction : Direction) : Rover {
         Direction.E -> rover.copy(x = rover.x + 1)
         Direction.S -> rover.copy(y = rover.y - 1)
         Direction.W -> rover.copy(x = rover.x - 1)
+    }
+}
+
+fun rotateClockwise(direction : Direction) : Direction {
+    return when(direction) {
+        Direction.N -> Direction.E
+        Direction.E -> Direction.S
+        Direction.S -> Direction.W
+        Direction.W -> Direction.N
     }
 }
 
