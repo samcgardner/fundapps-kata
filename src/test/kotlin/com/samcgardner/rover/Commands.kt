@@ -50,4 +50,50 @@ class Commands {
         assertEquals(Direction.N, movedRover.heading)
     }
 
+    @Test
+    fun turnsNorthToEast() {
+        val initialRover = Rover(0, 0, Direction.N)
+        val movedRover = applyCommand(initialRover, Command.R)
+        assertEquals(0, movedRover.x)
+        assertEquals(0, movedRover.y)
+        assertEquals(Direction.E, movedRover.heading)
+    }
+
+    @Test
+    fun turnsEastToSouth() {
+        val initialRover = Rover(0, 0, Direction.E)
+        val movedRover = applyCommand(initialRover, Command.R)
+        assertEquals(0, movedRover.x)
+        assertEquals(0, movedRover.y)
+        assertEquals(Direction.S, movedRover.heading)
+    }
+
+    @Test
+    fun turnsSouthToWest() {
+        val initialRover = Rover(0, 0, Direction.S)
+        val movedRover = applyCommand(initialRover, Command.R)
+        assertEquals(0, movedRover.x)
+        assertEquals(0, movedRover.y)
+        assertEquals(Direction.W, movedRover.heading)
+    }
+
+
+    @Test
+    fun turnsWestToNorth() {
+        val initialRover = Rover(0, 0, Direction.W)
+        val movedRover = applyCommand(initialRover, Command.R)
+        assertEquals(0, movedRover.x)
+        assertEquals(0, movedRover.y)
+        assertEquals(Direction.N, movedRover.heading)
+    }
+
+    @Test
+    fun turnsLeft() {
+        val initialRover = Rover(0, 0, Direction.N)
+        val movedRover = applyCommand(initialRover, Command.R)
+        assertEquals(0, movedRover.x)
+        assertEquals(0, movedRover.y)
+        assertEquals(Direction.W, movedRover.heading)
+    }
+
 }

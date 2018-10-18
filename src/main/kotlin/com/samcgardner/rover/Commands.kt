@@ -1,7 +1,7 @@
 package com.samcgardner.rover
 
 data class Rover(val x : Int, val y : Int, val heading : Direction)
-enum class Command{F, B}
+enum class Command{F, B, R, L}
 enum class Direction{N, S, E, W}
 
 fun move(rover : Rover, commands : Sequence<String>) : Rover {
@@ -15,6 +15,8 @@ fun applyCommand(rover : Rover, command : Command) : Rover {
     return when(command) {
         Command.F -> move(rover, rover.heading)
         Command.B -> move(rover, invertDirection(rover.heading))
+        Command.R -> rover
+        Command.L -> rover
     }
 }
 
