@@ -15,3 +15,7 @@ system ranging between (0, max-x) and (0, max-y) and does not permit negative co
     // Show our new rover in all its glory
     println(movedRover.toString())
 ```
+
+# Tests
+
+The test suite can be run with `./gradlew clean test`
