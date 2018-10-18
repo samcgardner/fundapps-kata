@@ -3,31 +3,32 @@ package com.samcgardner.rover
 import java.util.Collections.rotate
 
 data class Rover(val x : Int, val y : Int, val heading : Direction)
+data class Planet(val maxx : Int, val maxy : Int)
 enum class Command{F, B, R, L}
 enum class Direction{N, S, E, W}
 
-fun move(rover : Rover, commands : Sequence<String>) : Rover {
+fun move(rover : Rover, planet: Planet, commands : Sequence<String>) : Rover {
     // Don't check for or catch an exception here - if there is an error in our command sequence, we'd like to know
     // about it _before_ we start moving our rover around
     val parsedCommands = commands.map { Command.valueOf(it) }
-    return parsedCommands.fold(rover, { myRover, command  -> applyCommand(myRover, command)})
+    return parsedCommands.fold(rover, { myRover, command  -> applyCommand(myRover, planet, command)})
 }
 
-fun applyCommand(rover : Rover, command : Command) : Rover {
+fun applyCommand(rover : Rover, planet : Planet, command : Command) : Rover {
     return when(command) {
-        Command.F -> move(rover, rover.heading)
-        Command.B -> move(rover, invertDirection(rover.heading))
+        Command.F -> move(rover, planet, rover.heading)
+        Command.B -> move(rover, planet, invertDirection(rover.heading))
         Command.R -> rover.copy(heading = rotateClockwise(rover.heading))
         Command.L -> rover.copy(heading = invertDirection(rotateClockwise(rover.heading)))
     }
 }
 
-fun move(rover : Rover, direction : Direction) : Rover {
+fun move(rover : Rover, planet : Planet, direction : Direction) : Rover {
     return when(direction) {
-        Direction.N -> rover.copy(y = rover.y + 1)
-        Direction.E -> rover.copy(x = rover.x + 1)
-        Direction.S -> rover.copy(y = rover.y - 1)
-        Direction.W -> rover.copy(x = rover.x - 1)
+        Direction.N -> rover.copy(y = (rover.y + 1 % planet.maxy))
+        Direction.E -> rover.copy(x = rover.x + 1 % planet.maxx)
+        Direction.S -> rover.copy(y = rover.y - 1 % planet.maxy)
+        Direction.W -> rover.copy(x = rover.x - 1 % planet.maxx)
     }
 }
 
