@@ -1,5 +1,6 @@
 package com.samcgardner.rover
 
+import java.lang.Math.abs
 import java.util.Collections.rotate
 
 data class Rover(val x : Int, val y : Int, val heading : Direction)
@@ -25,10 +26,10 @@ fun applyCommand(rover : Rover, planet : Planet, command : Command) : Rover {
 
 fun move(rover : Rover, planet : Planet, direction : Direction) : Rover {
     return when(direction) {
-        Direction.N -> rover.copy(y = (rover.y + 1 % planet.maxy))
-        Direction.E -> rover.copy(x = rover.x + 1 % planet.maxx)
-        Direction.S -> rover.copy(y = rover.y - 1 % planet.maxy)
-        Direction.W -> rover.copy(x = rover.x - 1 % planet.maxx)
+        Direction.N -> rover.copy(y = (rover.y + 1) % planet.maxy)
+        Direction.E -> rover.copy(x = (rover.x + 1) % planet.maxx)
+        Direction.S -> rover.copy(y = (abs (rover.y - 1)) % planet.maxy)
+        Direction.W -> rover.copy(x = (abs (rover.x - 1)) % planet.maxx)
     }
 }
 
@@ -49,4 +50,6 @@ fun invertDirection(direction : Direction) : Direction {
         Direction.W -> Direction.E
     }
 }
+
+
 

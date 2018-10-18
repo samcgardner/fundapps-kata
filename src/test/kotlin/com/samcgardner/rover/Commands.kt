@@ -5,7 +5,7 @@ import org.junit.Test
 
 class Commands {
 
-    val tinyTestPlanet = Planet(0, 0)
+    val tinyTestPlanet = Planet(2, 2)
 
     @Test
     fun movesNorth() {
@@ -30,7 +30,7 @@ class Commands {
         val initialRover = Rover(0, 0, Direction.S)
         val movedRover = applyCommand(initialRover, tinyTestPlanet, Command.F)
         assertEquals(0, movedRover.x)
-        assertEquals(-1, movedRover.y)
+        assertEquals(1, movedRover.y)
         assertEquals(Direction.S, movedRover.heading)
     }
 
@@ -38,7 +38,7 @@ class Commands {
     fun movesWest() {
         val initialRover = Rover(0, 0, Direction.W)
         val movedRover = applyCommand(initialRover, tinyTestPlanet, Command.F)
-        assertEquals(-1, movedRover.x)
+        assertEquals(1, movedRover.x)
         assertEquals(0, movedRover.y)
         assertEquals(Direction.W, movedRover.heading)
     }
@@ -48,7 +48,7 @@ class Commands {
         val initialRover = Rover(0, 0, Direction.N)
         val movedRover = applyCommand(initialRover, tinyTestPlanet, Command.B)
         assertEquals(0, movedRover.x)
-        assertEquals(-1, movedRover.y)
+        assertEquals(1, movedRover.y)
         assertEquals(Direction.N, movedRover.heading)
     }
 
