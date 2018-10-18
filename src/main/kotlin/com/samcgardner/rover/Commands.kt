@@ -12,6 +12,9 @@ fun move(rover : Rover, commands : Sequence<String>) : Rover {
 }
 
 fun applyCommand(rover : Rover, command : Command) : Rover {
-    return rover
+    return when(command) {
+        Command.F ->
+        Command.B ->
+    }
 }
 
