@@ -13,8 +13,26 @@ fun move(rover : Rover, commands : Sequence<String>) : Rover {
 
 fun applyCommand(rover : Rover, command : Command) : Rover {
     return when(command) {
-        Command.F ->
-        Command.B ->
+        Command.F -> move(rover, rover.heading)
+        Command.B -> move(rover, invertDirection(rover.heading))
+    }
+}
+
+fun move(rover : Rover, direction : Direction) : Rover {
+    return when(direction) {
+        Direction.N -> rover.copy(y = rover.y + 1)
+        Direction.E -> rover.copy(x = rover.x + 1)
+        Direction.S -> rover.copy(y = rover.y - 1)
+        Direction.W -> rover.copy(x = rover.x - 1)
+    }
+}
+
+fun invertDirection(direction : Direction) : Direction {
+    return when(direction) {
+        Direction.N -> Direction.S
+        Direction.E -> Direction.W
+        Direction.S -> Direction.N
+        Direction.W -> Direction.E
     }
 }
 
